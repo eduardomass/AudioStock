@@ -14,7 +14,6 @@ namespace AudioStock.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            BaseDatos.IniciarUsuario();
             return View();
         }
 
@@ -22,7 +21,7 @@ namespace AudioStock.Controllers
         public IActionResult Index(Usuario usuario)
         {
             bool encontro = false;
-            foreach (Usuario usuario2 in BaseDatos.ListaUsuarios)
+            foreach (Usuario usuario2 in BaseDatos.Usuarios)
             {
                 if (usuario2.Password == usuario.NombreUsuario &&
                     usuario2.NombreUsuario == usuario.Password)

@@ -1,3 +1,4 @@
+using AudioStock.AD;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ namespace AudioStock
 {
     public class Startup
     {
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -52,6 +54,8 @@ namespace AudioStock
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            BaseDatos.IniciarBaseDatosHarcoded();
         }
     }
 }
