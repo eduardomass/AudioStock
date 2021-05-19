@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    
+}
+@model AudioStock.Models.Usuario
+
+<div class="text-center">
+    <h1 class="display-4">Bienvendios</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+
+<table class="table table-light">
+    <thead>
+        <tr>
+            <th>Parametro</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tr>
+        <td>NombreUsuario</td>
+        <td>@Model.NombreUsuario</td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td>@Model.Password</td>
+    </tr>
+</table>
