@@ -1,0 +1,27 @@
+﻿
+@model List<AudioStock.Models.Equipo>
+
+
+<table class="table table-light">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marca</th>
+            <th>Equipo</th>
+            <th>Modelo</th>
+        </tr>
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        
+<tr>
+    <td>
+        @item.Id
+    </td>
+    <td>@item.Marca.Descripcion</td>
+    <td>@item.TipoEquipo.Descripcion</td>
+    <td>@item.Modelo</td>
+</tr>
+    }
+</table>

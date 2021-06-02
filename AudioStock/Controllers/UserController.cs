@@ -23,8 +23,8 @@ namespace AudioStock.Controllers
             bool encontro = false;
             foreach (Usuario usuario2 in BaseDatos.Usuarios)
             {
-                if (usuario2.Password == usuario.NombreUsuario &&
-                    usuario2.NombreUsuario == usuario.Password)
+                if (usuario2.Password == usuario.Password &&
+                    usuario2.NombreUsuario == usuario.NombreUsuario)
                 {
                     encontro = true;
                     break;
@@ -35,7 +35,8 @@ namespace AudioStock.Controllers
             if (encontro)
             {
                 ViewBag.Mensaje = "Usuario Correcto";
-                return View();
+                //return View();
+                return RedirectToAction("Index", "General");
             }
             else
             {
