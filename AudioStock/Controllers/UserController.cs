@@ -14,6 +14,8 @@ namespace AudioStock.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            AudioStockContext audio = new AudioStockContext();
+            audio.Usuarios.ToList();
             return View();
         }
 

@@ -9,22 +9,22 @@ using AudioStock.Models;
 
 namespace AudioStock.Controllers
 {
-    public class MarcasController : Controller
+    public class EquipoesController : Controller
     {
         private readonly AudioStockContext _context;
 
-        public MarcasController(AudioStockContext context)
+        public EquipoesController(AudioStockContext context)
         {
             _context = context;
         }
 
-        // GET: Marcas
+        // GET: Equipoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Marcas.ToListAsync());
+            return View(await _context.Equipos.ToListAsync());
         }
 
-        // GET: Marcas/Details/5
+        // GET: Equipoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,76 +32,101 @@ namespace AudioStock.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marcas
+            var equipo = await _context.Equipos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (marca == null)
+            if (equipo == null)
             {
                 return NotFound();
             }
 
-            return View(marca);
+            return View(equipo);
         }
 
-        // GET: Marcas/Create
+        // GET: Equipoes/Create
         public IActionResult Create()
         {
+            this.CompletarViewBag(new Equipo());
             return View();
         }
 
-        // POST: Marcas/Create
+        // POST: Equipoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion")] Marca marca)
+        //public async Task<IActionResult> Create([Bind("Id,Modelo,SacNumero,Fecha,Estado,Observacion")] Equipo equipo)
+        public async Task<IActionResult> Create(Equipo equipo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(marca);
+                equipo.Marca = _context.Marcas.FirstOrDefault(o=>o.Id == equipo.IdMarcaSeleccionada);
+                equipo.TipoEquipo = _context.TiposEquipos.FirstOrDefault(o => o.Id == equipo.IdTipoEquipoSeleccionado);
+                _context.Add(equipo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(marca);
+            this.CompletarViewBag(equipo);
+            return View(equipo);
         }
 
-        // GET: Marcas/Edit/5
+        // GET: Equipoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            
             if (id == null)
             {
                 return NotFound();
             }
 
-            var marca = await _context.Marcas.FindAsync(id);
-            if (marca == null)
+            var equipo = await _context.Equipos.FindAsync(id);
+
+            this.CompletarViewBag(equipo);
+
+
+            if (equipo == null)
             {
                 return NotFound();
             }
-            return View(marca);
+            return View(equipo);
         }
 
-        // POST: Marcas/Edit/5
+        public void CompletarViewBag(Equipo equipo)
+
+        {
+            ViewBag.TipoEquipos = _context.TiposEquipos.ToList();
+            ViewBag.Marcas = _context.Marcas.ToList();
+            if (equipo.Marca != null)
+                equipo.IdMarcaSeleccionada = equipo.Marca.Id;
+
+            if (equipo.TipoEquipo != null)
+                equipo.IdTipoEquipoSeleccionado = equipo.TipoEquipo.Id;
+        }
+
+        // POST: Equipoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion")] Marca marca)
+        public async Task<IActionResult> Edit(Equipo equipo)
         {
-            if (id != marca.Id)
+            if (equipo.Id != equipo.Id)
             {
                 return NotFound();
             }
+
+            equipo.Marca = _context.Marcas.FirstOrDefault(o => o.Id == equipo.IdMarcaSeleccionada);
+            equipo.TipoEquipo = _context.TiposEquipos.FirstOrDefault(o => o.Id == equipo.IdTipoEquipoSeleccionado);
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(marca);
+                    _context.Update(equipo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MarcaExists(marca.Id))
+                    if (!EquipoExists(equipo.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +137,10 @@ namespace AudioStock.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(marca);
+            return View(equipo);
         }
 
-        // GET: Marcas/Delete/5
+        // GET: Equipoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +148,30 @@ namespace AudioStock.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marcas
+            var equipo = await _context.Equipos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (marca == null)
+            if (equipo == null)
             {
                 return NotFound();
             }
 
-            return View(marca);
+            return View(equipo);
         }
 
-        // POST: Marcas/Delete/5
+        // POST: Equipoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var marca = await _context.Marcas.FindAsync(id);
-            _context.Marcas.Remove(marca);
+            var equipo = await _context.Equipos.FindAsync(id);
+            _context.Equipos.Remove(equipo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MarcaExists(int id)
+        private bool EquipoExists(int id)
         {
-            return _context.Marcas.Any(e => e.Id == id);
+            return _context.Equipos.Any(e => e.Id == id);
         }
     }
 }

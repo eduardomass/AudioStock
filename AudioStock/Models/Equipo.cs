@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,11 @@ namespace AudioStock.Models
         public TipoEquipo TipoEquipo { get; set; }
         public Marca Marca { get; set; }
 
-        public int MarcaId { get; set; } //esto va aca?
+        [NotMapped]
+        public int IdMarcaSeleccionada { get; set; } //esto va aca?
+        [NotMapped]
+        public int IdTipoEquipoSeleccionado { get; set; } //esto va aca?
+        
         //public Consultorio Consultorio { get; set; }
 
 

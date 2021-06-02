@@ -9,36 +9,36 @@ using System.Threading.Tasks;
 
 namespace AudioStock.Controllers
 {
-    public class EquipoController : Controller
+    public class _MarcasController : Controller
     {
-        // GET: EquipoController
+        // GET: MarcasController
         public ActionResult Index()
         {
-            return View(BaseDatos.Equipos);
+
+            return View(BaseDatos.Marcas);
         }
 
-        // GET: EquipoController/Details/5
+        // GET: MarcasController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: EquipoController/Create
+        // GET: MarcasController/Create
         public ActionResult Create()
         {
-            ViewBag.Marcas = BaseDatos.Marcas;
             return View();
         }
 
-        // POST: EquipoController/Create
+        // POST: MarcasController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Equipo equipo)
+        public ActionResult Create(Marca modelo)
         {
             try
             {
-                equipo.Id = BaseDatos.Equipos.Max(o => o.Id) + 1;
-                BaseDatos.Equipos.Add(equipo);
+                //Me faltaria el id!
+                BaseDatos.Marcas.Add(modelo);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -47,19 +47,22 @@ namespace AudioStock.Controllers
             }
         }
 
-        // GET: EquipoController/Edit/5
+        // GET: MarcasController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var modeloAEditar = BaseDatos.Marcas.FirstOrDefault(o => o.Id == id);
+            return View(modeloAEditar);
         }
 
-        // POST: EquipoController/Edit/5
+        // POST: MarcasController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Equipo modelo)
+        public ActionResult Edit(Marca marca)
         {
             try
             {
+                var modeloAEditar = BaseDatos.Marcas.FirstOrDefault(o => o.Id == marca.Id);
+                modeloAEditar.Descripcion = marca.Descripcion;
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -68,16 +71,18 @@ namespace AudioStock.Controllers
             }
         }
 
-        // GET: EquipoController/Delete/5
+        // GET: MarcasController/Delete/5
         public ActionResult Delete(int id)
         {
+            var modeloAEditar = BaseDatos.Marcas.FirstOrDefault(o => o.Id == id);
+            BaseDatos.Marcas.Remove(modeloAEditar);
             return View();
         }
 
-        // POST: EquipoController/Delete/5
+        // POST: MarcasController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Equipo equipo)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {

@@ -9,22 +9,22 @@ using AudioStock.Models;
 
 namespace AudioStock.Controllers
 {
-    public class MarcasController : Controller
+    public class TipoEquiposController : Controller
     {
         private readonly AudioStockContext _context;
 
-        public MarcasController(AudioStockContext context)
+        public TipoEquiposController(AudioStockContext context)
         {
             _context = context;
         }
 
-        // GET: Marcas
+        // GET: TipoEquipoes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Marcas.ToListAsync());
+            return View(await _context.TiposEquipos.ToListAsync());
         }
 
-        // GET: Marcas/Details/5
+        // GET: TipoEquipoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -32,39 +32,39 @@ namespace AudioStock.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marcas
+            var tipoEquipo = await _context.TiposEquipos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (marca == null)
+            if (tipoEquipo == null)
             {
                 return NotFound();
             }
 
-            return View(marca);
+            return View(tipoEquipo);
         }
 
-        // GET: Marcas/Create
+        // GET: TipoEquipoes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Marcas/Create
+        // POST: TipoEquipoes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Descripcion")] Marca marca)
+        public async Task<IActionResult> Create([Bind("Id,Descripcion,Observaciones")] TipoEquipo tipoEquipo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(marca);
+                _context.Add(tipoEquipo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(marca);
+            return View(tipoEquipo);
         }
 
-        // GET: Marcas/Edit/5
+        // GET: TipoEquipoes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +72,22 @@ namespace AudioStock.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marcas.FindAsync(id);
-            if (marca == null)
+            var tipoEquipo = await _context.TiposEquipos.FindAsync(id);
+            if (tipoEquipo == null)
             {
                 return NotFound();
             }
-            return View(marca);
+            return View(tipoEquipo);
         }
 
-        // POST: Marcas/Edit/5
+        // POST: TipoEquipoes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion")] Marca marca)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Descripcion,Observaciones")] TipoEquipo tipoEquipo)
         {
-            if (id != marca.Id)
+            if (id != tipoEquipo.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace AudioStock.Controllers
             {
                 try
                 {
-                    _context.Update(marca);
+                    _context.Update(tipoEquipo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MarcaExists(marca.Id))
+                    if (!TipoEquipoExists(tipoEquipo.Id))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace AudioStock.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(marca);
+            return View(tipoEquipo);
         }
 
-        // GET: Marcas/Delete/5
+        // GET: TipoEquipoes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,30 +123,30 @@ namespace AudioStock.Controllers
                 return NotFound();
             }
 
-            var marca = await _context.Marcas
+            var tipoEquipo = await _context.TiposEquipos
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (marca == null)
+            if (tipoEquipo == null)
             {
                 return NotFound();
             }
 
-            return View(marca);
+            return View(tipoEquipo);
         }
 
-        // POST: Marcas/Delete/5
+        // POST: TipoEquipoes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var marca = await _context.Marcas.FindAsync(id);
-            _context.Marcas.Remove(marca);
+            var tipoEquipo = await _context.TiposEquipos.FindAsync(id);
+            _context.TiposEquipos.Remove(tipoEquipo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MarcaExists(int id)
+        private bool TipoEquipoExists(int id)
         {
-            return _context.Marcas.Any(e => e.Id == id);
+            return _context.TiposEquipos.Any(e => e.Id == id);
         }
     }
 }

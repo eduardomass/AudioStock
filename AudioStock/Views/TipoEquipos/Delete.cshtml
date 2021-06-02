@@ -1,4 +1,4 @@
-﻿@model AudioStock.Models.Marca
+﻿@model AudioStock.Models.TipoEquipo
 
 @{
     ViewData["Title"] = "Delete";
@@ -9,7 +9,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>Marca</h4>
+    <h4>TipoEquipo</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -17,6 +17,12 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Observaciones)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Observaciones)
         </dd>
     </dl>
     
