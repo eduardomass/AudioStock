@@ -1,3 +1,6 @@
 .vs/
 AudioStock/bin/
 AudioStock/obj/
+bin/
+wwwroot/lib/
+obj/
