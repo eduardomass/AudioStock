@@ -9,11 +9,11 @@ using AudioStock.Models;
 
 namespace AudioStock.Controllers
 {
-    public class TipoEquipoesController : Controller
+    public class TipoEquiposController : Controller
     {
         private readonly AudioStockContext _context;
 
-        public TipoEquipoesController(AudioStockContext context)
+        public TipoEquiposController(AudioStockContext context)
         {
             _context = context;
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AudioStock.Models
 {
-    public class AudioStockContext : DbContext
+    public partial class AudioStockContext : DbContext
     {
         public DbSet<Usuario> Usuarios { get; set; }
 
@@ -32,5 +32,31 @@ namespace AudioStock.Models
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Equipo>(entity =>
+            {
+                entity.HasIndex(e => e.MarcaId);
+
+                entity.HasIndex(e => e.TipoEquipoId);
+
+                entity.HasOne(d => d.Marca)
+                    .WithMany(p => p.Equipos)
+                    .HasForeignKey(d => d.MarcaId);
+
+                entity.HasOne(d => d.TipoEquipo)
+                    .WithMany(p => p.Equipos)
+                    .HasForeignKey(d => d.TipoEquipoId);
+            });
+
+            modelBuilder.Entity<TipoEquipo>(entity =>
+            {
+                entity.Property(e => e.Descripcion).IsRequired();
+            });
+
+            OnModelCreatingPartial(modelBuilder);
+        }
+
+        partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }

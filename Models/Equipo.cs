@@ -19,12 +19,16 @@ namespace AudioStock.Models
         public TipoEquipo TipoEquipo { get; set; }
         public Marca Marca { get; set; }
 
-        [NotMapped]
-        public int IdMarcaSeleccionada { get; set; } //esto va aca?
-        [NotMapped]
-        public int IdTipoEquipoSeleccionado { get; set; } //esto va aca?
-        
+        //[NotMapped]
+        //public int IdMarcaSeleccionada { get; set; } //esto va aca?
+        //[NotMapped]
+        //public int IdTipoEquipoSeleccionado { get; set; } //esto va aca?
+
         //public Consultorio Consultorio { get; set; }
+
+        public int? TipoEquipoId { get; set; }
+        public int? MarcaId { get; set; }
+
 
 
     }

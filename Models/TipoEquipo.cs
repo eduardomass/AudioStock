@@ -15,5 +15,7 @@ namespace AudioStock.Models
 
         [Display(Name = "Estas son las observaciones")]
         public string Observaciones { get; set; }
+
+        public virtual ICollection<Equipo> Equipos { get; set; }
     }
 }

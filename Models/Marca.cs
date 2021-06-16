@@ -9,5 +9,7 @@ namespace AudioStock.Models
     {
         public int Id { get; set; }
         public string Descripcion { get; set; }
+
+        public virtual ICollection<Equipo> Equipos { get; set; }
     }
 }

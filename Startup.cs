@@ -33,6 +33,7 @@ namespace AudioStock
             services.AddDbContext<AudioStockContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddSession(options => options.IdleTimeout = TimeSpan.FromMinutes(20)); //Session
 
         }
 
@@ -51,6 +52,8 @@ namespace AudioStock
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession(); //Session
 
             app.UseRouting();
 

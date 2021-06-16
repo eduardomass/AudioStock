@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Compile Remove="Controllers\GeneralController.cs" />
-    <Compile Remove="Controllers\TipoEquiposController.cs" />
     <Compile Remove="Migrations\20210602160413_AudioStock.cs" />
     <Compile Remove="Migrations\20210602160413_AudioStock.Designer.cs" />
     <Compile Remove="Migrations\20210602163317_Dos.cs" />

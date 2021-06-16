@@ -59,8 +59,8 @@ namespace AudioStock.Controllers
         {
             if (ModelState.IsValid)
             {
-                equipo.Marca = _context.Marcas.FirstOrDefault(o=>o.Id == equipo.IdMarcaSeleccionada);
-                equipo.TipoEquipo = _context.TipoEquipos.FirstOrDefault(o => o.Id == equipo.IdTipoEquipoSeleccionado);
+                //equipo.Marca = _context.Marcas.FirstOrDefault(o=>o.Id == equipo.IdMarcaSeleccionada);
+                //equipo.TipoEquipo = _context.TipoEquipos.FirstOrDefault(o => o.Id == equipo.IdTipoEquipoSeleccionado);
                 _context.Add(equipo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -100,11 +100,11 @@ namespace AudioStock.Controllers
         {
             ViewBag.TipoEquipos = _context.TipoEquipos.ToList();
             ViewBag.Marcas = _context.Marcas.ToList();
-            if (equipo.Marca != null)
-                equipo.IdMarcaSeleccionada = equipo.Marca.Id;
+            //if (equipo.Marca != null)
+            //    equipo.IdMarcaSeleccionada = equipo.Marca.Id;
 
-            if (equipo.TipoEquipo != null)
-                equipo.IdTipoEquipoSeleccionado = equipo.TipoEquipo.Id;
+            //if (equipo.TipoEquipo != null)
+            //    equipo.IdTipoEquipoSeleccionado = equipo.TipoEquipo.Id;
         }
 
         // POST: Equipoes/Edit/5
@@ -119,8 +119,8 @@ namespace AudioStock.Controllers
                 return NotFound();
             }
 
-            equipo.Marca = _context.Marcas.FirstOrDefault(o => o.Id == equipo.IdMarcaSeleccionada);
-            equipo.TipoEquipo = _context.TipoEquipos.FirstOrDefault(o => o.Id == equipo.IdTipoEquipoSeleccionado);
+            //equipo.Marca = _context.Marcas.FirstOrDefault(o => o.Id == equipo.IdMarcaSeleccionada);
+            //equipo.TipoEquipo = _context.TipoEquipos.FirstOrDefault(o => o.Id == equipo.IdTipoEquipoSeleccionado);
 
             if (ModelState.IsValid)
             {
