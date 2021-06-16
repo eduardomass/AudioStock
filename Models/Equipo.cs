@@ -16,7 +16,12 @@ namespace AudioStock.Models
         public DateTime Fecha { get; set; }
         public string Estado { get; set; }
         public string Observacion { get; set; }
+
+        public int? TipoEquipoId { get; set; }
         public TipoEquipo TipoEquipo { get; set; }
+
+
+        public int? MarcaId { get; set; }
         public Marca Marca { get; set; }
 
         //[NotMapped]
@@ -26,8 +31,8 @@ namespace AudioStock.Models
 
         //public Consultorio Consultorio { get; set; }
 
-        public int? TipoEquipoId { get; set; }
-        public int? MarcaId { get; set; }
+        
+        
 
 
 
